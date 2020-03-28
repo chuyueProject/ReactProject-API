@@ -1,7 +1,7 @@
 const express=require('express')
 const bodyParser=require('body-parser');
 const path = require('path')
-const tokenMiddleWare = require('./middleware/tokenMiddleWare')
+// const tokenMiddleWare = require('./middleware/tokenMiddleWare')
 const app =express()
 const db=require('./db/connect')
 

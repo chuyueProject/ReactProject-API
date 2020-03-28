@@ -14,7 +14,7 @@
 
 const  express = require('express')
 const  {userReg,userLogin,logOut,insertUser,delUser} = require("../controls/userControl.js")
-const tokenMiddlWare = require('../middleware/tokenMiddleWare')
+// const tokenMiddlWare = require('../middleware/tokenMiddleWare')
 const  Mail = require('../utils/mail')
 const  mails={} 
 const router = express.Router()
@@ -106,13 +106,13 @@ router.post('/login',(req,res)=>{
 })
 
 // 退出登录 也需要验证token 
-router.post('/logout',tokenMiddlWare,(req,res)=>{
-  let {_id} = req.body 
-  // 数据库里的token的清空
-  logOut(_id)
-  .then(()=>{
-    res.send({err:0,msg:'退出ok'})
-  })
+// router.post('/logout',tokenMiddlWare,(req,res)=>{
+//   let {_id} = req.body 
+//   // 数据库里的token的清空
+//   logOut(_id)
+//   .then(()=>{
+//     res.send({err:0,msg:'退出ok'})
+//   })
 
-})
+// })
 module.exports = router
