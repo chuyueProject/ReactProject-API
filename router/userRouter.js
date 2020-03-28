@@ -13,19 +13,12 @@
 
 
 const  express = require('express')
-const  {userReg,userLogin,logOut,insertUser,delUser} = require("../controls/userControl.js")
+const  {userReg,userLogin,delUser,findAllUser} = require("../controls/userControl.js")
 // const tokenMiddlWare = require('../middleware/tokenMiddleWare')
 const  Mail = require('../utils/mail')
 const  mails={} 
 const router = express.Router()
-//用户插入
-router.post('/add',(req,res)=>{
-  let {mail,pass}=req.body
-  insertUser({mail,pass})
-  .then(()=>{res.send({err:0,msg:'插入成功'})})
-  .catch((err)=>{
-    res.send({err:-1,msg:'插入失败请重试'})})
-})
+
 //用户删除
 router.post('/del',(req,res)=>{
   // 获取要删除数据的id
@@ -105,14 +98,8 @@ router.post('/login',(req,res)=>{
   .catch((err)=>{ res.send({err:-1,msg:err})})
 })
 
-// 退出登录 也需要验证token 
-// router.post('/logout',tokenMiddlWare,(req,res)=>{
-//   let {_id} = req.body 
-//   // 数据库里的token的清空
-//   logOut(_id)
-//   .then(()=>{
-//     res.send({err:0,msg:'退出ok'})
-//   })
-
-// })
+router.post('/getUserList',(req,res)=>{
+  findAllUser().then((infos)=>{res.send({list:infos,err:0,msg:'查询成功'})})
+  .catch((err)=>{res.send({err:-1,msg:'查询失败请重试'})})
+})
 module.exports = router
