@@ -26,6 +26,8 @@ let delGoods = async (_id) => {
 
 //修改商品
 let updateGoods = async (_id, updateInfo) => {
+    // console.log('id',_id)
+    // console.log('updateInfo',updateInfo)
     let result = await GoodsModel.updateOne({ _id }, updateInfo)
     return result
 }
@@ -46,9 +48,7 @@ let findGoodsByKw=async (kw,page,pageSize)=>{
     let allCount=allGoods.length
     let result=await GoodsModel.find({$or:[{desc:{$regex:regex}},{Chinesename:{$regex:regex}}]})
     .skip(Number((page-1)*pageSize)).limit(Number(pageSize))
-
     return {result,allCount}
-
 }
 
 //分类查询
@@ -64,4 +64,3 @@ let findGoodsByType =async (goodsType,page,pageSize)=>{
 module.exports = {
     insertGoods, findGoods, delGoods, updateGoods,findAllGoods,findGoodsByPage,findGoodsByKw,findGoodsByType
 }
-

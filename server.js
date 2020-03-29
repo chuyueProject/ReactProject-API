@@ -10,15 +10,22 @@ const db=require('./db/connect')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+
 //静态资源路径
+
 app.use('/public',express.static(path.join(__dirname,'./public')))
 
 let goodsRouter=require('./router/goodsRouter')
 let userRouter = require('./router/userRouter')
 
 
+
 app.use('/admin/goods',goodsRouter)
 app.use('/admin/user',userRouter)
+
+let kindRouter=require('./router/foodRouter')
+let uploadRouer=require('./router/uploadRouter')
+
 app.listen(3000,()=>{
     console.log(`/**
     *　　　　　　　 ┏┓　 ┏┓+ +

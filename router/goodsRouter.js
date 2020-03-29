@@ -20,7 +20,7 @@ const {insertGoods,findGoods,delGoods,updateGoods,findAllGoods,findGoodsByPage,f
 router.post('/add',(req,res)=>{
     let {Chinesename,Englishname,price,desc,picture,temp,cream} = req.body 
     insertGoods({Chinesename,Englishname,price,desc,picture,temp,cream})
-    .then(()=>{res.send({err:0,msg:'插入成功'})})
+    .then((infos)=>{res.send({err:0,msg:'插入成功',list:infos})})
     .catch((err)=>{res.send({err:-1,msg:'插入失败请重试'})})
 })
 /**
@@ -35,8 +35,8 @@ router.post('/add',(req,res)=>{
  * @apiSuccess {String} msg  信息提示.
  * @apiSuccess {Array} list  查询到的数据.
  */
-router.post('/getInfoById',(req,res)=>{
-    let {_id}=req.body
+router.get('/getInfoById',(req,res)=>{
+    let {_id}=req.query
     findGoods(_id).then((infos)=>{res.send({list:infos,err:0,msg:'查询成功'})})
     .catch((err)=>{res.send({err:-1,msg:'查询失败请重试'})})
 })
@@ -50,7 +50,7 @@ router.post('/getInfoById',(req,res)=>{
  * @apiSuccess {String} msg  信息提示.
  * @apiSuccess {Array} list  查询到的数据.
  */
-router.post('/getAllInfo',(req,res)=>{
+router.get('/getAllInfo',(req,res)=>{
     findAllGoods().then((infos)=>{res.send({list:infos,err:0,msg:'查询成功'})})
     .catch((err)=>{res.send({err:-1,msg:'查询失败请重试'})})
 })
@@ -72,7 +72,7 @@ router.post('/getAllInfo',(req,res)=>{
  * @apiSuccess {String} err 状态码.
  * @apiSuccess {String} msg  信息提示.
  */
-router.post('/update',(req,res)=>{
+router.put('/update',(req,res)=>{
     let {_id, Chinesename,Englishname,price,desc,picture,temp,cream} = req.body 
     updateGoods(_id,{Chinesename,Englishname,price,desc,picture,temp,cream})
     .then(()=>{res.send({err:0,msg:'修改成功'})})
@@ -88,8 +88,10 @@ router.post('/update',(req,res)=>{
  * @apiSuccess {String} err 状态码.
  * @apiSuccess {String} msg  信息提示.
  */
-router.post('/del',(req,res)=>{
+router.delete('/del',(req,res)=>{
+    console.log(req.body)
     let {_id}=req.body;
+    // console.log(_id)
     delGoods(_id)
     .then(()=>{res.send({err:0,msg:'删除成功'})})
     .catch((err)=>{res.send({err:-1,msg:'删除失败请重试'})})
@@ -107,9 +109,10 @@ router.post('/del',(req,res)=>{
  * @apiSuccess {Array} list  查询到的数据列表.
  * @apiSuccess {Number} allCount  查询到的数据总数.
  */
-router.post('/getInfoByPage',(req,res)=>{
-    let page=req.body.page||1
-    let pageSize=req.body.pageSize||2
+router.get('/getInfoByPage',(req,res)=>{
+    
+    let page=req.query.page||1
+    let pageSize=req.query.pageSize||2
     findGoodsByPage(page,pageSize)
     .then((data)=>{
         let {result,allCount}=data
@@ -130,10 +133,10 @@ router.post('/getInfoByPage',(req,res)=>{
  * @apiSuccess {Array} list  查询到的数据列表.
  * @apiSuccess {Number} allCount  查询到的数据总数.
  */
-router.post('/findGoodsByKw',(req,res)=>{
-    let kw=req.body.kw
-    let page=req.body.page||1
-    let pageSize=req.body.pageSize||2
+router.get('/findGoodsByKw',(req,res)=>{
+    let kw=req.query.kw
+    let page=req.query.page||1
+    let pageSize=req.query.pageSize||2
     findGoodsByKw(kw,page,pageSize)
     .then((data)=>{
         let {result,allCount}=data
@@ -155,10 +158,10 @@ router.post('/findGoodsByKw',(req,res)=>{
  * @apiSuccess {Array} list  查询到的数据列表.
  * @apiSuccess {Number} allCount  查询到的数据总数.
  */
-router.post('/findGoodsByType',(req,res)=>{
-    let goodsType=req.body.goodsType
-    let page=req.body.page||1
-    let pageSize=req.body.pageSize||2
+router.get('/findGoodsByType',(req,res)=>{
+    let goodsType=req.query.goodsType
+    let page=req.query.page||1
+    let pageSize=req.query.pageSize||2
     findGoodsByType(goodsType,page,pageSize)
     .then((data)=>{
         let {result,allCount}=data
