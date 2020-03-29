@@ -7,8 +7,13 @@ const db=require('./db/connect')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use('/public',express.static(path.join(__dirname,'./public')))
+
 let goodsRouter=require('./router/goodsRouter')
 app.use('/admin/goods',goodsRouter)
+
+let kindRouter=require('./router/foodRouter')
+let uploadRouer=require('./router/uploadRouter')
 
 app.listen(3000,()=>{
     console.log(`/**
