@@ -3,7 +3,7 @@ const router = expres.Router()
 
 const {
     allKind, insertKind, removeKind, updataKind
-} = require('../controller/foodsControl')
+} = require('../controls/kindControl')
 
 //食物分类列表
 /**

@@ -19,6 +19,17 @@ const  Mail = require('../utils/mail')
 const  mails={} 
 const router = express.Router()
 
+
+
+//用户删除
+router.post('/add',(req,res)=>{
+  let {mail,pass}=req.body
+  addUser({mail,pass})
+  .then(()=>{res.send({err:0,msg:'插入成功'})})
+  .catch((err)=>{
+    res.send({err:-1,msg:'插入失败请重试'})})
+})
+
 //用户删除
 router.post('/del',(req,res)=>{
   // 获取要删除数据的id

@@ -1,5 +1,11 @@
 const UserModel = require("../db/model/userModel")
 
+//添加用户
+let addUser = async ({mail,pass}) => {
+  let result = await UserModel.insertMany({mail,pass})
+  return result
+}
+
 //删除用户
 let delUser = async (_id) => {
   let result = await UserModel.deleteOne({ _id })
@@ -38,5 +44,6 @@ module.exports = {
   userReg,
   userLogin,
   findAllUser,
-  delUser
+  addUser
+
 }

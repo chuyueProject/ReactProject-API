@@ -2,10 +2,10 @@
 //hao
 const mongoose=require('mongoose')
 
-let koodSchema=new mongoose.Schema({
+let kindSchema=new mongoose.Schema({
     name:{type:String,required:true}
 })
 
-let foodModel=mongoose.model('Kind',koodSchema)
+let foodModel=mongoose.model('Kind',kindSchema)
 
 module.exports=foodModel
