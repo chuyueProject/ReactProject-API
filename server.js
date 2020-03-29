@@ -26,7 +26,7 @@ let uploadRouer=require('./router/uploadRouter')
 
 app.use('/admin/goods',goodsRouter)
 app.use('/admin/user',userRouter)
-app.use('/admin/user',kindRouter)
+app.use('/admin/kind',kindRouter)
 app.use('/admin/upload',uploadRouer)
 
 app.listen(3000,()=>{

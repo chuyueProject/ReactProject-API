@@ -1,28 +1,30 @@
 //这个是数据库相关的控制器
 
 //将数据库的相关内容进行抽离处理
-const FoodModel=require('../router/foodRouter')
+const kindRouter=require('../db/model/kindModel')
 
 //查询全部的商品分类
 let allKind=async ()=>{
-    let result=await FoodModel.find()
+    let result=await kindRouter.find()
     return result
 }
 
 //商品分类增加
 let insertKind=async (obj)=>{
-    let result=await FoodModel.insertMany(obj)
+    console.log(obj)
+    let result=await kindRouter.insertMany(obj)
+   
 }
 
 //商品分类删除
 let removeKind=async (_id)=>{
-    let result=await FoodModel.deleteOne({_id})
+    let result=await kindRouter.deleteOne({_id})
     return result
 }
 
 //商品分类修改
 let updataKind=async(_id,updataInfo)=>{
-    let result =await FoodModel.updateOne({_id},updataInfo)
+    let result =await kindRouter.updateOne({_id},updataInfo)
 }
 
 module.exports={

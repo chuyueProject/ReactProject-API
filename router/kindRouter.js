@@ -64,8 +64,9 @@ router.delete('/removekind', (req, res) => {
  */
 
 router.post('/inserkind', (req, res) => {
+   
     let { name } = req.body
-    console.log(req.body)
+   
     insertKind({ name })
         .then((data) => {
             res.send({ err: 0, msg: "插入成功" })
