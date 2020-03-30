@@ -2,7 +2,7 @@ const expres = require('express')
 const router = expres.Router()
 
 const {
-    allKind, insertKind, removeKind, updataKind
+    allKind, insertKind, removeKind, updataKind,kindOneData
 } = require('../controls/kindControl')
 
 //食物分类列表
@@ -44,6 +44,7 @@ router.delete('/removekind', (req, res) => {
     let { _id } = req.body
     removeKind(_id)
         .then((data) => {
+            console.log(data)
             res.send({ err: 0, msg: '删除成功' })
         })
         .catch((err) => {
@@ -64,9 +65,7 @@ router.delete('/removekind', (req, res) => {
  */
 
 router.post('/inserkind', (req, res) => {
-   
     let { name } = req.body
-   
     insertKind({ name })
         .then((data) => {
             res.send({ err: 0, msg: "插入成功" })
@@ -96,6 +95,12 @@ router.put('/updataKind', (req, res) => {
         .catch((err) => {
             res.send({ err: -1, msg: '修改失败' })
         })
+})
+
+router.post('/getInfoById',(req,res)=>{
+    let {_id}=req.body
+    kindOneData(_id).then((infos)=>{res.send({list:infos,err:0,msg:'查询成功'})})
+    .catch((err)=>{res.send({err:-1,msg:'查询失败请重试'})})
 })
 
 module.exports = router
