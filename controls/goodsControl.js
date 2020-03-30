@@ -32,6 +32,15 @@ let updateGoods = async (_id, updateInfo) => {
     return result
 }
 
+
+//修改putaway
+let updatePutaway = async (_id, putaway) => {
+    // console.log('id',_id)
+    // console.log('updateInfo',updateInfo)
+    let result = await GoodsModel.updateOne({ _id }, {putaway})
+    return result
+}
+
 //分页查询
 let findGoodsByPage =async (page=1,pageSize=2)=>{
     let allGoods=await GoodsModel.find()
@@ -62,5 +71,5 @@ let findGoodsByType =async (goodsType,page,pageSize)=>{
 }
 
 module.exports = {
-    insertGoods, findGoods, delGoods, updateGoods,findAllGoods,findGoodsByPage,findGoodsByKw,findGoodsByType
+    insertGoods, findGoods, delGoods, updateGoods,findAllGoods,findGoodsByPage,findGoodsByKw,findGoodsByType,updatePutaway
 }

@@ -1,6 +1,6 @@
 const express =require('express')
 const router=express.Router()
-const {insertGoods,findGoods,delGoods,updateGoods,findAllGoods,findGoodsByPage,findGoodsByKw,findGoodsByType} =require('../controls/goodsControl')
+const {insertGoods,findGoods,delGoods,updateGoods,findAllGoods,findGoodsByPage,findGoodsByKw,findGoodsByType,updatePutaway} =require('../controls/goodsControl')
 /**
  * @api {post} /admin/goods/add   商品添加
  * @apiName add
@@ -18,10 +18,10 @@ const {insertGoods,findGoods,delGoods,updateGoods,findAllGoods,findGoodsByPage,f
  * @apiSuccess {String} msg  信息提示.
  */
 router.post('/add',(req,res)=>{
-    let {Chinesename,Englishname,price,desc,picture,temp,cream} = req.body 
-    insertGoods({Chinesename,Englishname,price,desc,picture,temp,cream})
+    let {Chinesename,Englishname,price,oldprice,desc,picture,temp,cream,kind,putaway} = req.body 
+    insertGoods({Chinesename,Englishname,price,oldprice,desc,picture,temp,cream,kind,putaway})
     .then((infos)=>{res.send({err:0,msg:'插入成功',list:infos})})
-    .catch((err)=>{res.send({err:-1,msg:'插入失败请重试'})})
+    .catch((err)=>{res.send({err:-1,msg:'插入失败请重试',errInfo:err })})
 })
 /**
  * @api {post} /admin/goods/getInfoById   商品查询
@@ -73,8 +73,17 @@ router.get('/getAllInfo',(req,res)=>{
  * @apiSuccess {String} msg  信息提示.
  */
 router.put('/update',(req,res)=>{
-    let {_id, Chinesename,Englishname,price,desc,picture,temp,cream} = req.body 
-    updateGoods(_id,{Chinesename,Englishname,price,desc,picture,temp,cream})
+    let {_id, Chinesename,Englishname,price,oldprice,desc,picture,temp,cream,kind,putaway} = req.body 
+    updateGoods(_id,{Chinesename,Englishname,price,oldprice,desc,picture,temp,cream,kind,putaway})
+    .then(()=>{res.send({err:0,msg:'修改成功'})})
+    .catch((err)=>{res.send({err:-1,msg:'修改失败请重试'})})
+})
+
+
+// 更新上架状态putaway
+router.put('/putaway',(req,res)=>{
+    let {_id,putaway} = req.body 
+    updatePutaway(_id,putaway)
     .then(()=>{res.send({err:0,msg:'修改成功'})})
     .catch((err)=>{res.send({err:-1,msg:'修改失败请重试'})})
 })
@@ -89,7 +98,7 @@ router.put('/update',(req,res)=>{
  * @apiSuccess {String} msg  信息提示.
  */
 router.delete('/del',(req,res)=>{
-    console.log(req.body)
+    // console.log(req.body)
     let {_id}=req.body;
     // console.log(_id)
     delGoods(_id)

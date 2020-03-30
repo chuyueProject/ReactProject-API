@@ -13,7 +13,7 @@
 
 
 const  express = require('express')
-const  {userReg,userLogin,delUser,findAllUser} = require("../controls/userControl.js")
+const  {userLogin,delUser,findAllUser,addUser} = require("../controls/userControl.js")
 // const tokenMiddlWare = require('../middleware/tokenMiddleWare')
 const  Mail = require('../utils/mail')
 const  mails={} 

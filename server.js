@@ -20,12 +20,14 @@ let userRouter = require('./router/userRouter')
 let kindRouter = require('./router/kindRouter')
 let uploadRouer = require('./router/uploadRouter')
 
-app.use('/admin/goods', goodsRouter)
-app.use('/admin/user', userRouter)
-app.use('/admin/kind', kindRouter)
-app.use('/admin/upload', uploadRouer)
 
-app.listen(3000, () => {
+app.use('/admin/goods',goodsRouter)
+app.use('/admin/user',userRouter)
+app.use('/admin/kind',kindRouter)
+app.use('/admin/upload',uploadRouer)
+
+app.listen(3000,()=>{
+
     console.log(`/**
     *　　　　　　　 ┏┓　 ┏┓+ +
     *　　　　　　　┏┛┻━━━┛┻┓ + +
