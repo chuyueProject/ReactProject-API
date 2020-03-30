@@ -1,7 +1,7 @@
 //这个是数据库相关的控制器
 
 //将数据库的相关内容进行抽离处理
-const FoodModel=require('../router/foodRouter')
+const FoodModel=require('../router/kindRouter')
 
 //查询全部的商品分类
 let allKind=async ()=>{
