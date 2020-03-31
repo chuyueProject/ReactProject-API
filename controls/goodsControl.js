@@ -15,6 +15,7 @@ let findGoods = async (_id) => {
 // 查询全部商品
 let findAllGoods = async () => {
     let result = await GoodsModel.find()
+    
     return result
 }
 
@@ -47,6 +48,7 @@ let findGoodsByPage =async (page=1,pageSize=2)=>{
     let allCount=allGoods.length;
     // console.log(page,pageSize)
     let result=await GoodsModel.find().skip(Number(page-1)*pageSize).limit(Number(pageSize))
+    // console.log(result)
     return {result,allCount}
 }
 

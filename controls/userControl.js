@@ -1,8 +1,8 @@
 const UserModel = require("../db/model/userModel")
 
 //添加用户
-let addUser = async ({mail,pass}) => {
-  let result = await UserModel.insertMany({mail,pass})
+let addUser = async ({user,pass}) => {
+  let result = await UserModel.insertMany({user,pass})
   return result
 }
 
@@ -28,9 +28,16 @@ let userReg = async (mail, pass) => {
 }
 
 // 用户登录
-let userLogin = async (mail, pass) => {
-  let result = await UserModel.findOne({ mail, pass })
-  return result
+let userLogin = async (user, pass) => {
+  // console.log(user,pass)
+  let result = await UserModel.findOne({ user, pass })
+  if (result) {
+  
+    return result
+  } else {
+    throw '用户名或密码不存在'
+  }
+ 
 }
 
 // 查询全部用户
@@ -44,6 +51,7 @@ module.exports = {
   userReg,
   userLogin,
   findAllUser,
-  addUser
+  addUser,
+  delUser
 
 }

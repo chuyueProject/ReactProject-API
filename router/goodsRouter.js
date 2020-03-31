@@ -125,6 +125,7 @@ router.get('/getInfoByPage',(req,res)=>{
     findGoodsByPage(page,pageSize)
     .then((data)=>{
         let {result,allCount}=data
+    
         res.send({ err:0,msg:'查询成功',list:result,allCount})})
     .catch((err)=>{res.send({err:-1,msg:'查询失败请重试'})})
 })
