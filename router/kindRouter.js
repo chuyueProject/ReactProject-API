@@ -44,7 +44,7 @@ router.delete('/removekind', (req, res) => {
     let { _id } = req.body
     removeKind(_id)
         .then((data) => {
-            console.log(data)
+            // console.log(data)
             res.send({ err: 0, msg: '删除成功' })
         })
         .catch((err) => {

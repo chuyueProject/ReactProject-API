@@ -19,12 +19,14 @@ let goodsRouter = require('./router/goodsRouter')
 let userRouter = require('./router/userRouter')
 let kindRouter = require('./router/kindRouter')
 let uploadRouer = require('./router/uploadRouter')
+let discountRouer = require('./router/discountRouter')
 
 
 app.use('/admin/goods',goodsRouter)
 app.use('/admin/user',userRouter)
 app.use('/admin/kind',kindRouter)
 app.use('/admin/upload',uploadRouer)
+app.use('/admin/discount',discountRouer)
 
 app.listen(3000,()=>{
 
